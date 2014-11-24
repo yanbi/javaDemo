@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build" name="javaDemo">
+<!-- The directory containing source code -->
+	<property name="src.dir" value="src"/>
+	<property name="test.dir" value="test"/>
+	<property name="test.dir" value="src"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="report.dir" value="."/>
+<!-- Temporary build directories -->
+<property name="build.dir" value="bin"/>
+
+<!-- classpath -->
+ <path id="classpath">
+        <pathelement location="bin"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="lib/junit4.11.jar"/>
+        <pathelement location="lib/hamcrest1.3.jar"/>
+    </path>
+
+<!--  target to create the bin directories prior to the compile target.-->
+<target name="clean" description="removes all generated files.">
+        <delete dir="bin"/>
+ </target>
+ 
+ <target name="init" depends="clean">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="test">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+</target>
+    
+<target name="junit" depends="init">
+     <mkdir dir="${report.dir}"/>
+     <junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+        <classpath>
+            <path refid="classpath"/>
+            <path refid="application"/>
+        </classpath>
+
+        <formatter type="xml"/>
+
+        <batchtest fork="yes">
+            <fileset dir="${test.dir}" includes="*.java"/>
+        </batchtest>
+        
+    </junit>
+</target>
+  
+</project>

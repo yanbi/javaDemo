@@ -47,13 +47,13 @@
     
 <target name="junit" depends="build-project">
      <mkdir dir="${report.dir}"/>
-     <junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+     <junit printsummary="yes" haltonfailure="no" showoutput="yes">
         <classpath>
             <path refid="classpath"/>            
         </classpath>
         <formatter type="xml"/>
-        <batchtest fork="yes">
-            <fileset dir="${test.dir}" includes="*.java"/>
+        <batchtest fork="yes" todir="${report.dir}">
+            <fileset dir="${test.dir}" includes="**/*.java"/>
         </batchtest>
         
     </junit>

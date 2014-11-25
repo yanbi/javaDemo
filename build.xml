@@ -8,6 +8,8 @@
 <!-- Temporary build directories -->
 <property name="build.dir" value="bin"/>
 
+<property name="debuglevel" value="source,lines,vars"/>
+
 <!-- classpath -->
  <path id="classpath">
         <pathelement location="bin"/>
@@ -33,17 +35,23 @@
             </fileset>
         </copy>
 </target>
+
+ <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" >
+            <src path="src"/>
+            <src path="test"/>
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
     
-<target name="junit" depends="init">
+<target name="junit" depends="build-project">
      <mkdir dir="${report.dir}"/>
      <junit printsummary="yes" haltonfailure="yes" showoutput="yes">
         <classpath>
-            <path refid="classpath"/>
-            
+            <path refid="classpath"/>            
         </classpath>
-
         <formatter type="xml"/>
-
         <batchtest fork="yes">
             <fileset dir="${test.dir}" includes="*.java"/>
         </batchtest>

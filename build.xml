@@ -3,16 +3,14 @@
 <!-- The directory containing source code -->
 	<property name="src.dir" value="src"/>
 	<property name="test.dir" value="test"/>
-	<property name="test.dir" value="src"/>
 	<property name="lib.dir" value="lib"/>
-	<property name="report.dir" value="."/>
+	<property name="report.dir" value="junit"/>
 <!-- Temporary build directories -->
 <property name="build.dir" value="bin"/>
 
 <!-- classpath -->
  <path id="classpath">
         <pathelement location="bin"/>
-        <path refid="JUnit 4.libraryclasspath"/>
         <pathelement location="lib/junit4.11.jar"/>
         <pathelement location="lib/hamcrest1.3.jar"/>
     </path>

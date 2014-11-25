@@ -15,6 +15,7 @@
 		<pathelement location="bin" />
 		<pathelement location="lib/junit4.11.jar" />
 		<pathelement location="lib/hamcrest1.3.jar" />
+		
 	</path>
 
 	<!-- target to create the bin directories prior to the compile target. -->

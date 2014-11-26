@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir="." default="build" name="javaDemo">
-<!-- The directory containing source code -->
-	<property name="src.dir" value="src"/>
-	<property name="test.dir" value="test"/>
-	<property name="lib.dir" value="lib"/>
-	<property name="report.dir" value="junit"/>
-<!-- Temporary build directories -->
-<property name="build.dir" value="bin"/>
+	<!-- The directory containing source code -->
+	<property name="src.dir" value="src" />
+	<property name="test.dir" value="test" />
+	<property name="lib.dir" value="lib" />
+	<property name="report.dir" value="junit" />
+	<!-- Temporary build directories -->
+	<property name="build.dir" value="bin" />
 
-<property name="debuglevel" value="source,lines,vars"/>
+	<property name="debuglevel" value="source,lines,vars" />
 
-<!-- classpath -->
- <path id="classpath">
-        <pathelement location="bin"/>
-        <pathelement location="lib/junit4.11.jar"/>
-        <pathelement location="lib/hamcrest1.3.jar"/>
-    </path>
+	<!-- classpath -->
+	<path id="classpath">
+		<pathelement location="bin" />
+		<pathelement location="lib/junit4.11.jar" />
+		<pathelement location="lib/hamcrest1.3.jar" />
+		
+	</path>
 
-<!--  target to create the bin directories prior to the compile target.-->
-<target name="clean" description="removes all generated files.">
-        <delete dir="bin"/>
- </target>
- 
- <target name="init" depends="clean">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="test">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-</target>
+	<!-- target to create the bin directories prior to the compile target. -->
+	<target name="clean" description="removes all generated files.">
+		<delete dir="${report.dir}" />
+		 <delete dir="${build.dir}" /> 
+	</target>
 
- <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" >
-            <src path="src"/>
-            <src path="test"/>
-            <classpath refid="classpath"/>
-        </javac>
-    </target>
-    
-<target name="junit" depends="build-project">
-     <mkdir dir="${report.dir}"/>
-     <junit printsummary="yes" haltonfailure="no" showoutput="yes">
-        <classpath>
-            <path refid="classpath"/>            
-        </classpath>
-        <formatter type="xml"/>
-        <batchtest fork="yes" todir="${report.dir}">
-            <fileset dir="${test.dir}" includes="**/*.java"/>
-        </batchtest>
-        
-    </junit>
-</target>
-  
+	<target name="init" depends="clean">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="test">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin"
+			includeantruntime="false">
+			<src path="src" />
+			<src path="test" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<target name="junit" depends="build-project">
+		<mkdir dir="${report.dir}" />
+		<junit printsummary="yes" haltonfailure="no" showoutput="yes">
+			<classpath>
+				<path refid="classpath" />
+			</classpath>
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${report.dir}">
+				<fileset dir="${test.dir}" includes="**/*.java" />
+			</batchtest>
+
+		</junit>
+	</target>
+
 </project>

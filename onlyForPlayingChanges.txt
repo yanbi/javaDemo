@@ -6,3 +6,4 @@ test002 on test1 branch 26.11.2014
 test003 on test1 branch 26.11.2014
 test004 on test1 branch 26.11.2014
 test005 on test1 branch 26.11.2014
+test006 on test1 branch 26.11.2014

@@ -24,7 +24,7 @@
 		 <delete dir="${build.dir}" /> 
 	</target>
 
-	<target name="init">
+	<target name="init" target="clean">
 		<mkdir dir="bin" />
 		<copy includeemptydirs="false" todir="bin">
 			<fileset dir="src">

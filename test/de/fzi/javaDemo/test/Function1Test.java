@@ -22,7 +22,7 @@ public class Function1Test {
 	
 	@Test
 	public void test2() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 	
 	@Test

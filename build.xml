@@ -55,15 +55,40 @@
 				<fileset dir="${test.dir}" includes="**/*.java" />
 			</batchtest>
 		</junit>
+
+		
+
+		<!-- generate report with junitreport -->
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}" />
+			<report todir="${report.dir}" />
+		</junitreport>
+
+		<!-- concat the report through a filter chain to extract what you want -->
+		<concat>
+			<fileset file="${report.dir}/overview-summary.html" />
+			<filterchain>
+				<linecontainsregexp>
+					<regexp pattern='title="Display all tests"' />
+				</linecontainsregexp>
+				<tokenfilter>
+					<replaceregex pattern='&lt;td&gt;&lt;a href="all-tests.html" title="Display all tests"&gt;(\d+)&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="alltests-fails.html" title="Display all failures"&gt;(\d+)&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="alltests-errors.html" title="Display all errors"&gt;(\d+).*$' replace="Run: \1, Failed: \2, Errors: \3" />
+				</tokenfilter>
+			</filterchain>
+		</concat>
+
+		<fail message="test failed" if="test.failure" />
 	</target>
+
+
 
 	<target name="jar" depends="compile">
 		<mkdir dir="${jar.dir}" />
 		<jar destfile="${jar.dir}/${ant.project.name}.jar">
 
 			<fileset dir="${build.dir}">
-				<include name="**/*.*"/>
-				 <exclude name="**/*Test*"/>
+				<include name="**/*.*" />
+				<exclude name="**/*Test*" />
 			</fileset>
 			<fileset dir="${lib.dir}">
 				<include name="*.*" />

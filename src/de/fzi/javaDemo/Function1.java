@@ -8,5 +8,9 @@ package de.fzi.javaDemo;
  *
  */
 public class Function1 {
+	
+	public static int out1(){
+		return 1;
+	}
 
 }

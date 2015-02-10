@@ -6,20 +6,20 @@
 	<property name="lib.dir" value="lib" />
 	<property name="report.dir" value="junit" />
 	<property name="resource.dir" value="resource" />
+	
 	<!-- Temporary build directories -->
-	<property name="build.dir" value="bin" />
+    <property name="build.dir" value="bin" />
+	<property name="build.test.dir" value="bin/test" />
 
 
 	<!-- The directory to store .Jar -->
-	<property name="jar.dir" value="store" />
-
+	<property name="jar.dir" value="store/Yan_Bi_Test" />
 	<property name="debuglevel" value="source,lines,vars" />
 
 	<!-- classpath -->
 	<path id="classpath">
 		<pathelement location="${build.dir}" />
 		<fileset dir="${lib.dir}" includes="**/*" />
-		<fileset dir="${build.dir}" includes="**/*" />
 	</path>
 
 	<!-- target to create the bin directories prior to the compile target. -->
@@ -30,38 +30,48 @@
 
 	<target name="init" depends="clean">
 		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.test.dir}" />
 		<!--<copy includeemptydirs="false" todir="bin"> <fileset dir="src"> <exclude 
 			name="**/*.java" /> </fileset> </copy> <copy includeemptydirs="false" todir="bin"> 
 			<fileset dir="test"> <exclude name="**/*.java" /> </fileset> </copy> -->
 	</target>
 
-	<target name="compile" depends="init">
+	<target name="compile-src" depends="init">
 		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac debug="true" debuglevel="${debuglevel}" destdir="${build.dir}" includeantruntime="false">
-			<src path="${src.dir}" />
-			<src path="${test.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+			<classpath refid="classpath" />
+		</javac>
+
+	</target>
+	
+	<target name="compile-test" depends="compile-src">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac srcdir="${test.dir}" destdir="${build.test.dir}" includeantruntime="false">
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
-	<target name="junit" depends="compile">
+	<target name="junit" depends="compile-test">
 		<mkdir dir="${report.dir}" />
-		<junit printsummary="yes" haltonfailure="no" showoutput="yes">
+		<junit printsummary="yes" haltonfailure="no" showoutput="yes" outputtoformatters="true">
 			<classpath>
 				<path refid="classpath" />
 			</classpath>
+			<classpath>
+				<pathelement location="${build.test.dir}" />
+			</classpath>
 			<formatter type="xml" />
-			<batchtest fork="yes" todir="${report.dir}">
-				<fileset dir="${test.dir}" includes="**/*.java" />
-			</batchtest>
+			
 		</junit>
 
 		
 
 		<!-- generate report with junitreport -->
 		<junitreport todir="${report.dir}">
-			<fileset dir="${report.dir}" />
-			<report todir="${report.dir}" />
+			<fileset dir="${report.dir}">
+				<include name="*TEST*.xml" />
+			</fileset>
+			<report format="frames" todir="${report.dir}" />
 		</junitreport>
 
 		<!-- concat the report through a filter chain to extract what you want -->
@@ -72,30 +82,25 @@
 					<regexp pattern='title="Display all tests"' />
 				</linecontainsregexp>
 				<tokenfilter>
-					<replaceregex pattern='&lt;td&gt;&lt;a href="all-tests.html" title="Display all tests"&gt;(\d+)&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="alltests-fails.html" title="Display all failures"&gt;(\d+)&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="alltests-errors.html" title="Display all errors"&gt;(\d+).*$' replace="Run: \1, Failed: \2, Errors: \3" />
+					<replaceregex pattern='&lt;td&gt;&lt;a title="Display all tests" href="all-tests.html"&gt;(\d+)&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a title="Display all failures" href="alltests-fails.html"&gt;(\d+)&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a title="Display all errors" href="alltests-errors.html"&gt;(\d+).*$' replace="Run: \1, Failed: \2, Errors: \3" />
 				</tokenfilter>
 			</filterchain>
 		</concat>
 
-		<fail message="test failed" if="test.failure" />
+		
 	</target>
 
 
 
-	<target name="jar" depends="compile">
+	<target name="jar" depends="compile-src">
 		<mkdir dir="${jar.dir}" />
 		<jar destfile="${jar.dir}/${ant.project.name}.jar">
 
 			<fileset dir="${build.dir}">
 				<include name="**/*.*" />
-				<exclude name="**/*Test*" />
+				
 			</fileset>
-			<fileset dir="${lib.dir}">
-				<include name="*.*" />
-			</fileset>
-			<fileset dir="${resource.dir}">
-				<include name="*.*" />
-			</fileset>
+			
 		</jar>
 	</target>
 

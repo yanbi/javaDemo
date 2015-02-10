@@ -1,4 +1,5 @@
 # javaDemo
+Owner: Yan Bi
 CI Server: Jenkins, URL:<a href='http://danik22.fzi.de:8080/view/javaDemo/'>http://danik22.fzi.de:8080/view/javaDemo/</a><br>
 
 <h3>Pull Request Listner</h3> 

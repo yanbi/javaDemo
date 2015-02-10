@@ -7,7 +7,7 @@ Follow the <a href='http://danik22.fzi.de:8080/view/javaDemo/job/Pull_request_li
 
 <h3>Jar Generator</h3> 
 Generating Result: <a href='http://danik22.fzi.de:8080/view/javaDemo/job/master_listner_javaDemo/11/'><img src='http://danik22.fzi.de:8080/view/javaDemo/job/master_listner_javaDemo/11/badge/icon'></a><br>
-Follow the <a href='http://danik22.fzi.de:8080/view/javaDemo/job/master_listner_javaDemo/ws/store/Yan_Bi_Test/javaDemo.jar'> link</a> to download the last javaDemo.jar.<br>(Please note that: Access rights to CI server needed and it's not Release Version!)
+Follow the <a href='http://danik22.fzi.de:8080/view/javaDemo/job/master_listner_javaDemo/ws/store/Yan_Bi_Test/javaDemo.jar'> link</a> to download the last <strong>javaDemo.jar</strong>.<br>(Please note that: Access rights to CI server needed and it's not Release Version!)
 
 
 

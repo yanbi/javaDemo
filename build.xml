@@ -11,7 +11,6 @@
     <property name="build.dir" value="bin" />
 	<property name="build.test.dir" value="bin/test" />
 
-
 	<!-- The directory to store .Jar -->
 	<property name="jar.dir" value="store/Yan_Bi_Test" />
 	<property name="debuglevel" value="source,lines,vars" />
@@ -60,6 +59,10 @@
 			<classpath>
 				<pathelement location="${build.test.dir}" />
 			</classpath>
+			<!--skipNonTests="yes" -->
+			<batchtest fork="yes" todir="${report.dir}">
+				<fileset dir="${test.dir}" includes="**/*Test.java"  />
+			</batchtest>
 			<formatter type="xml" />
 			
 		</junit>
@@ -93,6 +96,7 @@
 
 
 	<target name="jar" depends="compile-src">
+		<delete dir="${jar.dir}" />
 		<mkdir dir="${jar.dir}" />
 		<jar destfile="${jar.dir}/${ant.project.name}.jar">
 

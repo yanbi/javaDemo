@@ -9,7 +9,7 @@ Click <a href='http://danik22.fzi.de:8080/view/javaDemo/job/Pull_request_listner
 
 <h3>Pull_request_listner_Conflict_javaDemo</h3>
 Generating Result:
-<a href='http://danik22.fzi.de:8080/view/javaDemo/job/Pull_request_listner_Conflict_javaDemo/15/'><img src='http://danik22.fzi.de:8080/buildStatus/icon?job=Pull_request_listner_Conflict_javaDemo&build=15'></a>
+<a href='http://danik22.fzi.de:8080/view/javaDemo/job/Pull_request_listner_Conflict_javaDemo/15/'><img src='http://danik22.fzi.de:8080/buildStatus/icon?job=Pull_request_listner_Conflict_javaDemo&build=15'></a><br>
 Click <a href='http://danik22.fzi.de:8080/view/javaDemo/job/Pull_request_listner_Conflict_javaDemo/test/trend'>here
 </a> to see the pull request's Test Trend Chart.<br> (Please note that: Access rights to CI server needed)
 

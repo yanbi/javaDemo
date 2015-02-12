@@ -63,8 +63,8 @@ test017 on test1 branch 10.02.2015
 
 test001 on test1 branch 12.02.2015
 test002 on test1 branch 12.02.2015
-<<<<<<< HEAD
 
-=======
 test002 on test1 branch 12.02.2015
->>>>>>> edca756f48ce5474e3d81745f0c04b9def78292a
+
+test003 on test1 branch 12.02.2015
+
